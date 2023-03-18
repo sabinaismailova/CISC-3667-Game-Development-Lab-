@@ -14,6 +14,7 @@ public class balloonMovement : MonoBehaviour
     [SerializeField] float objectHeight;
     [SerializeField] Sprite balloonPopDone;
     [SerializeField] AudioClip pop;
+    [SerializeField] double size = 0.8;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,8 @@ public class balloonMovement : MonoBehaviour
 
         rigid.velocity = new Vector2(speed, rigid.velocity.y);
         rigid.velocity = new Vector2(rigid.velocity.x, speed);
+
+        InvokeRepeating("Grow", (float)1.0, (float)1.0);
     }
 
     // Update is called once per frame
@@ -67,6 +70,12 @@ public class balloonMovement : MonoBehaviour
     {
         transform.Rotate(0, 180, 0);
         isFacingRight = !isFacingRight;
+    }
+
+    void Grow()
+    {
+        size += 0.3;
+        transform.localScale = new Vector3((float)size, (float)size, transform.localScale.z);
     }
 
 }

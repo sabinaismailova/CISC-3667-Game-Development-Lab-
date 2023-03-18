@@ -63,5 +63,5 @@ public class BeeMovement : MonoBehaviour
         transform.Rotate(0, 180, 0);
         isFacingRight = !isFacingRight;
     }
-    
+ 
 }
