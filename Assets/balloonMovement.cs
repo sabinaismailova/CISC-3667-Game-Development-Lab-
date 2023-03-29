@@ -14,11 +14,14 @@ public class balloonMovement : MonoBehaviour
     [SerializeField] float objectHeight;
     [SerializeField] Sprite balloonPopDone;
     [SerializeField] AudioClip pop;
-    [SerializeField] double size = 0.8;
+    [SerializeField] double size;
+    [SerializeField] int points = 15;
 
     // Start is called before the first frame update
     void Start()
     {
+        size = transform.localScale.x;
+
         if (rigid == null)
             rigid = GetComponent<Rigidbody2D>();
         speed = 8;
@@ -46,6 +49,9 @@ public class balloonMovement : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.x, speed);
             Flip();
         }
+        if(transform.localScale.x>3){
+            Destroy(gameObject, (float)0.1);
+        }
     }
 
     void LateUpdate()
@@ -60,6 +66,7 @@ public class balloonMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag == "pin"){
+            GameObject.Find("Scorekeeper").GetComponent<Scorekeeper>().AddPoints(points);
             AudioSource.PlayClipAtPoint(pop, transform.position);
             transform.GetComponent<SpriteRenderer>().sprite = balloonPopDone;
             Destroy(gameObject, (float)0.1);
@@ -74,8 +81,9 @@ public class balloonMovement : MonoBehaviour
 
     void Grow()
     {
-        size += 0.3;
+        size += 0.2;
         transform.localScale = new Vector3((float)size, (float)size, transform.localScale.z);
+        points -= 1;
     }
 
 }
