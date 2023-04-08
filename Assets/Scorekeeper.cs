@@ -7,9 +7,9 @@ using TMPro;
 
 public class Scorekeeper : MonoBehaviour
 {
-    [SerializeField] int score = 0;
+    [SerializeField] static int score = 0;
     const int DEFAULT_POINTS = 1;
-    const int SCORE_THRESHOLD = 5;
+    const int SCORE_THRESHOLD = 1;
     [SerializeField] TMP_Text scoreTXT;
     [SerializeField] TMP_Text Scene;
     [SerializeField] int level;
@@ -34,8 +34,9 @@ public class Scorekeeper : MonoBehaviour
         Debug.Log("score " + score);
         DisplayScore();
 
-        if(score >SCORE_THRESHOLD)
-            AdvanceLevel();
+        if(score >SCORE_THRESHOLD){
+            Invoke("AdvanceLevel", (float)0.3);
+        }
     }
 
     public void AddPoints()

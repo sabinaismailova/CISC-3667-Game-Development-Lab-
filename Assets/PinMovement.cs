@@ -5,8 +5,7 @@ using UnityEngine;
 public class PinMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rigid;
-    [SerializeField] int speed;
-    [SerializeField] bool isFacingRight = true;
+    [SerializeField] public int speed;
     [SerializeField] Camera camera;
     [SerializeField] Vector2 screenMin;
     [SerializeField] Vector2 screenMax;
@@ -19,7 +18,6 @@ public class PinMovement : MonoBehaviour
     {
         if (rigid == null)
             rigid = GetComponent<Rigidbody2D>();
-        speed = 8;
 
         camera = Camera.main;
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
@@ -31,6 +29,15 @@ public class PinMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(transform.rotation == Quaternion.Euler(0, -180, 0)){
+            speed = -8;
+        }
+        else{
+            speed = 8;
+        }
+
+        rigid.velocity = new Vector2(speed, rigid.velocity.y);
+
         if(transform.position.x==(screenMax.x - objectWidth)||transform.position.x==(screenMin.x + objectWidth)){
             Destroy(gameObject);
         }

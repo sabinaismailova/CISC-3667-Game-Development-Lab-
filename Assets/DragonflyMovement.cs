@@ -3,53 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BeeMovement : MonoBehaviour
+public class DragonflyMovement : MonoBehaviour
 {
-    [SerializeField] float movementHorizontal;
-    [SerializeField] float movementVertical;
     [SerializeField] Rigidbody2D rigid;
-    [SerializeField] int speed;
     [SerializeField] bool isFacingRight = true;
     [SerializeField] Camera camera;
     [SerializeField] Vector2 screenMin;
     [SerializeField] Vector2 screenMax;
     [SerializeField] float objectWidth;
     [SerializeField] float objectHeight;
-    [SerializeField] int level;
+    [SerializeField] float chasingRate;
+    [SerializeField] float level;
 
     // Start is called before the first frame update
     void Start()
     {
-        level = SceneManager.GetActiveScene().buildIndex+1;
-
         if (rigid == null)
             rigid = GetComponent<Rigidbody2D>();
-        speed = 10*level;
 
         camera = Camera.main;
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
         objectHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
+
+        level = (float)SceneManager.GetActiveScene().buildIndex+1;
+        chasingRate = level*0.002f;
+        if(chasingRate>0.008f){
+            chasingRate = 0.008f;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        movementHorizontal = Input.GetAxis("Horizontal");
-        movementVertical = Input.GetAxis("Vertical");
-
-        if (movementHorizontal < 0 && isFacingRight || movementHorizontal > 0 && !isFacingRight)
+        if(transform.position.x==(screenMax.x - objectWidth)||transform.position.x==(screenMin.x + objectWidth)){
             Flip();
-
-    }
-
-    //called potentially multiple times per frame
-    //used for physics & movement
-    void FixedUpdate()
-    { 
-        rigid.velocity = new Vector2(movementHorizontal * speed, rigid.velocity.y);
-        rigid.velocity = new Vector2(rigid.velocity.x, movementVertical * speed);
-        if (movementHorizontal < 0 && isFacingRight || movementHorizontal > 0 && !isFacingRight)
-            Flip();
+        }
+        transform.position = Vector2.MoveTowards(transform.position, GameObject.FindWithTag("Player").transform.position, chasingRate);
     }
 
     void LateUpdate()
@@ -67,5 +56,11 @@ public class BeeMovement : MonoBehaviour
         transform.Rotate(0, 180, 0);
         isFacingRight = !isFacingRight;
     }
- 
+
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.tag == "Player"){
+            //restart scene if the bee makes contact with the dragonfly 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
 }

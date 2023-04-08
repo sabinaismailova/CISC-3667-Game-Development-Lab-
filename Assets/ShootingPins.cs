@@ -29,6 +29,6 @@ public class ShootingPins : MonoBehaviour
 
     void SpawnPin(){
         Vector2 position = rigid.position;
-        Instantiate(pin, position, Quaternion.identity);
+        Instantiate(pin, position, transform.rotation);
     }
 }

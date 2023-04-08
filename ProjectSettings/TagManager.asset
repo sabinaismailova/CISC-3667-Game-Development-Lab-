@@ -6,6 +6,7 @@ TagManager:
   tags:
   - target
   - pin
+  - obstacle
   layers:
   - Default
   - TransparentFX

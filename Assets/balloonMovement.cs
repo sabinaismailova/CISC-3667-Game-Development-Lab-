@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class balloonMovement : MonoBehaviour
 {
@@ -16,22 +17,24 @@ public class balloonMovement : MonoBehaviour
     [SerializeField] AudioClip pop;
     [SerializeField] double size;
     [SerializeField] int points = 15;
+    [SerializeField] int level;
 
     // Start is called before the first frame update
     void Start()
     {
         size = transform.localScale.x;
+        level = SceneManager.GetActiveScene().buildIndex+1;
 
         if (rigid == null)
             rigid = GetComponent<Rigidbody2D>();
-        speed = 8;
+        speed = 5*level;
 
         camera = Camera.main;
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
         objectHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
 
-        rigid.velocity = new Vector2(speed, rigid.velocity.y);
-        rigid.velocity = new Vector2(rigid.velocity.x, speed);
+        rigid.velocity = new Vector2(speed, speed);
+        //rigid.velocity = new Vector2(rigid.velocity.x, speed);
 
         InvokeRepeating("Grow", (float)1.0, (float)1.0);
     }
@@ -49,8 +52,9 @@ public class balloonMovement : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.x, speed);
             Flip();
         }
-        if(transform.localScale.x>3){
+        if(transform.localScale.x>2){
             Destroy(gameObject, (float)0.1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -66,8 +70,8 @@ public class balloonMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag == "pin"){
-            GameObject.Find("Scorekeeper").GetComponent<Scorekeeper>().AddPoints(points);
             AudioSource.PlayClipAtPoint(pop, transform.position);
+            GameObject.Find("Scorekeeper").GetComponent<Scorekeeper>().AddPoints(points);
             transform.GetComponent<SpriteRenderer>().sprite = balloonPopDone;
             Destroy(gameObject, (float)0.1);
         }
@@ -85,5 +89,4 @@ public class balloonMovement : MonoBehaviour
         transform.localScale = new Vector3((float)size, (float)size, transform.localScale.z);
         points -= 1;
     }
-
 }
