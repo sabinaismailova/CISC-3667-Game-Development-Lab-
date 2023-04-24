@@ -20,6 +20,12 @@ public class BeeMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        float randomX = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+        float randomY = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
+        Vector3 randomPosition = new Vector3(randomX, randomY, 0);
+
+        gameObject.transform.position = randomPosition;
+
         level = SceneManager.GetActiveScene().buildIndex+1;
 
         if (rigid == null)
