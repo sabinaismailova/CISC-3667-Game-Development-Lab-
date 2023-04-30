@@ -31,6 +31,7 @@ public class Scorekeeper : MonoBehaviour
     public void AddPoints(int points)
     {
         score += points;
+        PersistentData.Instance.SetScore(score);
         Debug.Log("score " + score);
         DisplayScore();
 
@@ -51,7 +52,7 @@ public class Scorekeeper : MonoBehaviour
 
     public void DisplayLevel()
     {
-        Scene.text = "Level: " + (level+1);
+        Scene.text = "Level: " + (level);
     }
 
     public void AdvanceLevel()

@@ -5,40 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuNavigation : MonoBehaviour
 {
-    [SerializeField] GameObject InstructionsPanel;
-    [SerializeField] GameObject SettingsPanel;
-    [SerializeField] GameObject MenuButtons;
-    // Start is called before the first frame update
-    void Start()
-    {
-        InstructionsPanel.SetActive(false);
-        SettingsPanel.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void LoadInstructions(){
-        InstructionsPanel.SetActive(true);
-        MenuButtons.SetActive(false);
+        SceneManager.LoadScene("Instructions");
     }
 
     public void LoadSettings(){
-        SettingsPanel.SetActive(true);
-        MenuButtons.SetActive(false);
+        SceneManager.LoadScene("Settings");
     }
 
-    public void GoBackToMenu(){
-        MenuButtons.SetActive(true);
-        if(InstructionsPanel.active==true){
-            InstructionsPanel.SetActive(false);
-        }
-        else if(SettingsPanel.active==true){
-            SettingsPanel.SetActive(false);
-        }
+    public void LoadMenu(){
+        SceneManager.LoadScene("Menu");
     }
 
     public void Play(){

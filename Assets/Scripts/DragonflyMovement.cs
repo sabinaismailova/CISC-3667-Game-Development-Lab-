@@ -31,7 +31,7 @@ public class DragonflyMovement : MonoBehaviour
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
         objectHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
 
-        level = (float)SceneManager.GetActiveScene().buildIndex+1;
+        level = (float)SceneManager.GetActiveScene().buildIndex;
         chasingRate = level*0.002f;
         if(chasingRate>0.008f){
             chasingRate = 0.008f;
@@ -44,7 +44,8 @@ public class DragonflyMovement : MonoBehaviour
         if(transform.position.x==(screenMax.x - objectWidth)||transform.position.x==(screenMin.x + objectWidth)){
             Flip();
         }
-        transform.position = Vector2.MoveTowards(transform.position, GameObject.FindWithTag("Player").transform.position, chasingRate);
+        if(Time.timeScale==1)
+            transform.position = Vector2.MoveTowards(transform.position, GameObject.FindWithTag("Player").transform.position, chasingRate);
     }
 
     void LateUpdate()

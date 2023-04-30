@@ -14,7 +14,6 @@ public class balloonMovement : MonoBehaviour
     [SerializeField] float objectWidth;
     [SerializeField] float objectHeight;
     [SerializeField] Sprite balloonPopDone;
-    [SerializeField] AudioClip pop;
     [SerializeField] double size;
     [SerializeField] int points = 15;
     [SerializeField] int level;
@@ -29,7 +28,7 @@ public class balloonMovement : MonoBehaviour
         gameObject.transform.position = randomPosition;
 
         size = transform.localScale.x;
-        level = SceneManager.GetActiveScene().buildIndex+1;
+        level = SceneManager.GetActiveScene().buildIndex;
 
         if (rigid == null)
             rigid = GetComponent<Rigidbody2D>();
@@ -76,7 +75,7 @@ public class balloonMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag == "pin"){
-            AudioSource.PlayClipAtPoint(pop, transform.position);
+            PersistentData.Instance.GetAudio().Play();
             GameObject.Find("Scorekeeper").GetComponent<Scorekeeper>().AddPoints(points);
             transform.GetComponent<SpriteRenderer>().sprite = balloonPopDone;
             Destroy(gameObject, (float)0.1);
