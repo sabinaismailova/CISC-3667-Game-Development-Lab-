@@ -12,7 +12,7 @@ public class DragonflyMovement : MonoBehaviour
     [SerializeField] Vector2 screenMax;
     [SerializeField] float objectWidth;
     [SerializeField] float objectHeight;
-    [SerializeField] float chasingRate;
+    [SerializeField] public float chasingRate;
     [SerializeField] float level;
 
     // Start is called before the first frame update
@@ -31,10 +31,10 @@ public class DragonflyMovement : MonoBehaviour
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
         objectHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
 
-        level = (float)SceneManager.GetActiveScene().buildIndex;
-        chasingRate = level*0.002f;
-        if(chasingRate>0.008f){
-            chasingRate = 0.008f;
+        level = SceneManager.GetActiveScene().buildIndex;
+        chasingRate = (float)level*0.02f;
+        if(chasingRate>0.08f){
+            chasingRate = 0.08f;
         }
     }
 

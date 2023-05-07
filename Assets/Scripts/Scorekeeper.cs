@@ -7,17 +7,20 @@ using TMPro;
 
 public class Scorekeeper : MonoBehaviour
 {
-    [SerializeField] static int score = 0;
+    [SerializeField] public int score;
     const int DEFAULT_POINTS = 1;
     const int SCORE_THRESHOLD = 1;
     [SerializeField] TMP_Text scoreTXT;
     [SerializeField] TMP_Text Scene;
     [SerializeField] int level;
+    public int start;
 
     // Start is called before the first frame update
     void Start()
     {
-        level = SceneManager.GetActiveScene().buildIndex;
+        start = SceneManager.GetActiveScene().buildIndex;
+        level = start -(start/2);
+        score = PersistentData.Instance.GetScore();
         DisplayLevel();
         DisplayScore();
     }
@@ -30,13 +33,14 @@ public class Scorekeeper : MonoBehaviour
 
     public void AddPoints(int points)
     {
+        score = PersistentData.Instance.GetScore();
         score += points;
         PersistentData.Instance.SetScore(score);
         Debug.Log("score " + score);
         DisplayScore();
 
         if(score >SCORE_THRESHOLD){
-            Invoke("AdvanceLevel", (float)0.3);
+            Invoke("AdvanceLevel", (float)0.9);
         }
     }
 
@@ -57,6 +61,6 @@ public class Scorekeeper : MonoBehaviour
 
     public void AdvanceLevel()
     {
-        SceneManager.LoadScene(level + 1);
+        SceneManager.LoadScene(start+1);
     }
 }

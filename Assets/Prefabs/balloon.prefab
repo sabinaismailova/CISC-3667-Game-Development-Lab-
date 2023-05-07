@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4528077090362087722}
   - component: {fileID: 4528077090362087717}
   - component: {fileID: 4528077090362087723}
+  - component: {fileID: 289654861}
   m_Layer: 0
   m_Name: balloon
   m_TagString: target
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2947145103585840031}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.56, y: 1.96, z: 0}
+  m_LocalPosition: {x: 5.613, y: 1.951, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871d24bc33f5c467b870c6ac44300ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementHorizontal: 0
   rigid: {fileID: 4528077090362087722}
   speed: 0
   isFacingRight: 1
@@ -129,6 +129,11 @@ MonoBehaviour:
   screenMax: {x: 0, y: 0}
   objectWidth: 0
   objectHeight: 0
+  balloonPopDone: {fileID: 21300000, guid: bb3971cf223c94fc7bfe6bf80eea0b2e, type: 3}
+  size: 0
+  points: 15
+  level: 0
+  animator: {fileID: 0}
 --- !u!61 &4528077090362087723
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.09972072, y: 0.19944352}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -153,5 +158,25 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 1.6}
+  m_Size: {x: 1.4227185, y: 1.7329627}
   m_EdgeRadius: 0
+--- !u!95 &289654861
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2947145103585840031}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2092f9f818b6f4cb4bb0590d0d9b2710, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

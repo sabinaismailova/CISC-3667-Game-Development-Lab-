@@ -16,6 +16,7 @@ public class BeeMovement : MonoBehaviour
     [SerializeField] float objectWidth;
     [SerializeField] float objectHeight;
     [SerializeField] int level;
+    [SerializeField] Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,8 @@ public class BeeMovement : MonoBehaviour
         camera = Camera.main;
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
         objectHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
+
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -45,6 +48,10 @@ public class BeeMovement : MonoBehaviour
 
         if (movementHorizontal < 0 && isFacingRight || movementHorizontal > 0 && !isFacingRight)
             Flip();
+        else if(movementHorizontal<0||movementHorizontal>0)
+            animator.Play("beeZoom");
+        else if(movementHorizontal==0)
+            animator.Play("New Animation");
 
     }
 

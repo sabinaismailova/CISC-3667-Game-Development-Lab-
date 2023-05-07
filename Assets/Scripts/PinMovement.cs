@@ -38,7 +38,7 @@ public class PinMovement : MonoBehaviour
 
         rigid.velocity = new Vector2(speed, rigid.velocity.y);
 
-        if(transform.position.x==(screenMax.x - objectWidth)||transform.position.x==(screenMin.x + objectWidth)){
+        if(transform.position.x>(screenMax.x - objectWidth)||transform.position.x<(screenMin.x + objectWidth)){
             Destroy(gameObject);
         }
     }

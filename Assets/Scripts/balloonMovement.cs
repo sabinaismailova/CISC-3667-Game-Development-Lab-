@@ -15,8 +15,9 @@ public class balloonMovement : MonoBehaviour
     [SerializeField] float objectHeight;
     [SerializeField] Sprite balloonPopDone;
     [SerializeField] double size;
-    [SerializeField] int points = 15;
+    [SerializeField] int points;
     [SerializeField] int level;
+    [SerializeField] Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,7 @@ public class balloonMovement : MonoBehaviour
 
         if (rigid == null)
             rigid = GetComponent<Rigidbody2D>();
-        speed = 5*level;
+        speed = 4*level;
 
         camera = Camera.main;
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
@@ -42,17 +43,21 @@ public class balloonMovement : MonoBehaviour
         //rigid.velocity = new Vector2(rigid.velocity.x, speed);
 
         InvokeRepeating("Grow", (float)1.0, (float)1.0);
+
+        animator = GetComponent<Animator>();
+
+        points = 15;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.x==(screenMax.x - objectWidth)||transform.position.x==(screenMin.x + objectWidth)){
+        if(transform.position.x>(screenMax.x - objectWidth)||transform.position.x<(screenMin.x + objectWidth)){
             speed = speed*(-1);
             rigid.velocity = new Vector2(speed, rigid.velocity.y);
             Flip();
         }
-        if(transform.position.y==(screenMax.y - objectHeight)||(transform.position.y==screenMin.y + objectHeight)){
+        if(transform.position.y>(screenMax.y - objectHeight)||transform.position.y<(screenMin.y + objectHeight)){
             speed = speed*(-1);
             rigid.velocity = new Vector2(rigid.velocity.x, speed);
             Flip();
@@ -77,8 +82,9 @@ public class balloonMovement : MonoBehaviour
         if(other.gameObject.tag == "pin"){
             PersistentData.Instance.GetAudio().Play();
             GameObject.Find("Scorekeeper").GetComponent<Scorekeeper>().AddPoints(points);
-            transform.GetComponent<SpriteRenderer>().sprite = balloonPopDone;
-            Destroy(gameObject, (float)0.1);
+            GameObject.Find("dragonfly").GetComponent<DragonflyMovement>().chasingRate = 0;
+            animator.Play("balloonPop");
+            Destroy(gameObject, (float)0.5);
         }
     }
 

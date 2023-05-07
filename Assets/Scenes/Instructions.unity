@@ -310,7 +310,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.77, y: 260.32}
+  m_AnchoredPosition: {x: 1.77, y: 268.89}
   m_SizeDelta: {x: 438.8, y: 64.68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &695277331
@@ -360,13 +360,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 58
+  m_fontSize: 54.05
   m_fontSizeBase: 58
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -524,8 +524,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.77, y: -12.14}
-  m_SizeDelta: {x: 909.25, y: 448.51}
+  m_AnchoredPosition: {x: 1.77, y: -31.7}
+  m_SizeDelta: {x: 983.6, y: 496.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1340928158
 MonoBehaviour:
@@ -547,7 +547,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "Quest\n\nPop the balloons getting closer your beehive before it gets stuck
+    while getting away from the drangfly. Get caught by the dragonfly and you'll
+    die! \n\n\nHow to play\n\nUse the arrow keys to move in any direction you want.
+    Click control key to try to shoot a spear at the balloon.  Try to shoot the baloon
+    before it gets too big. The smaller the balloon, the more points you get. The
+    balloon and dragonfly speed up each level.  "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -574,15 +579,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 30.45
+  m_fontSizeBase: 34
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -653,6 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7fbc353ad544dc096374d8071e1a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: {fileID: 0}
 --- !u!4 &1544906998
 Transform:
   m_ObjectHideFlags: 0
@@ -1025,7 +1031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 487.78995, y: 268.89005}
+  m_AnchoredPosition: {x: 487.78995, y: 268.89}
   m_SizeDelta: {x: 62.79, y: 47.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1921690396
